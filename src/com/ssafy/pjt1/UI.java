@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import com.ssafy.pjt1.diet.DietDomain;
+import com.ssafy.pjt1.diet.DietManager;
+import com.ssafy.pjt1.diet.DietManagerImpl;
+import com.ssafy.pjt1.diet.FoodDomain;
+
 public class UI {
 	public static void main(String[] args) {
 		

@@ -1,4 +1,4 @@
-package com.ssafy.pjt1;
+package com.ssafy.pjt1.diet;
 
 public class FoodDomain {
 	private int dietId;
