@@ -7,20 +7,20 @@ import java.util.List;
 public class DietDomain {
 	
 	private int dietId;
-	private int userId;
+	private String userId;
 	private LocalDate date;
 	private String type;
 	private List<FoodDomain> foods = new ArrayList<>();
 	
 	public DietDomain() {}
 	
-	public DietDomain(int userId, LocalDate date, String type) {
+	public DietDomain(String userId, LocalDate date, String type) {
 		this.userId = userId;
 		this.date = date;
 		this.type = type;
 	}
 	
-	public DietDomain(int userId, LocalDate date, String type, List<FoodDomain> foods) {
+	public DietDomain(String userId, LocalDate date, String type, List<FoodDomain> foods) {
 		this.userId = userId;
 		this.date = date;
 		this.type = type;
@@ -36,11 +36,11 @@ public class DietDomain {
 		this.dietId = dietId;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	

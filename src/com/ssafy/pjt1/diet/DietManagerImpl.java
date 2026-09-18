@@ -1,73 +1,70 @@
 package com.ssafy.pjt1.diet;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DietManagerImpl implements DietManager {
-	//다이어트, 푸드 리스트 별도 관리
 	
-	private List<DietDomain> dietList = new ArrayList<DietDomain>();
-	private List<FoodDomain> foodList = new ArrayList<FoodDomain>();
+	private final DietRepository repository;
 	
-	private static DietManager instance = new DietManagerImpl();
-	
-	private DietManagerImpl() {
-		
+	public DietManagerImpl() {
+		repository = new DietRepository();
 	}
 	
-	public static DietManager getInstance() {
-		return instance;
-	}
-	
+	// F201. 식단 기록 추가
 	@Override
-	public void add(DietDomain dietdomain) {
-		dietList.add(dietdomain);
+	public void add(DietDomain diet) {
+		repository.save(diet);
 	}
-
+	
+	// F202. 전체 식단 조회
 	@Override
-	public DietDomain[] getAll() {
-		DietDomain[] result = new DietDomain[dietList.size()];
+	public List<DietDomain> getAll() {
+		return repository.findAll();
+	}
+	
+	// F202. 식단 ID를 이용한 상세 조회
+	@Override
+	public DietDomain getById(int dietId) throws DietDomainNotFoundException {
+		DietDomain diet = repository.findById(dietId);
 		
-		for (int i = 0; i < dietList.size(); i++) {
-			result[i] = dietList.get(i);
+		if(diet == null) {
+			throw new DietDomainNotFoundException(dietId);
 		}
-		return result;
+		
+		return diet;
 	}
-
+	
+	// F203. 식단 수정
 	@Override
-	public DietDomain getDietdomain(int dietId) {
-		// TODO Auto-generated method stub
+	public void update(DietDomain diet) throws DietDomainNotFoundException {
+		DietDomain existing = repository.findById(diet.getDietId());
+		
+		if(existing == null) {
+			throw new DietDomainNotFoundException(diet.getDietId());
+		}
+		
+		repository.update(diet);
+	}
+	
+	// F204. 식단 삭제
+	@Override
+	public void delete(int dietId) throws DietDomainNotFoundException {
+		DietDomain existing = repository.findById(dietId);
+		
+		if(existing == null) {
+			throw new DietDomainNotFoundException(dietId);
+		}
+		
+		repository.delete(dietId);
+	}
+	
+	
+	// 식단 검색
+	@Override
+	public List<DietDomain> searchFoodName(String foodName) {
 		return null;
 	}
 
-	@Override
-	public DietDomain[] searchFoodName(String foodName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(DietDomain dietdomain) throws DietDomainNotFoundException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean delete(int dietId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void saveData() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void loadData() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }
