@@ -19,6 +19,19 @@ public class DietRepository {
 		return new ArrayList<>(diets);
 	}
 	
+	// F202. 특정 사용자의 식단 조회
+	public List<DietDomain> findByUserId(String userId) {
+		List<DietDomain> result = new ArrayList<>();
+		
+		for (DietDomain diet: diets) {
+			if(diet.getUserId().equals(userId)) {
+				result.add(diet);
+			}
+		}
+		
+		return result;
+	}
+	
 	// F202. ID로 식단 조회
 	public DietDomain findById(int dietId) {
 		for (DietDomain diet : diets) {
@@ -29,6 +42,18 @@ public class DietRepository {
 		
 		return null;
 	} 
+	
+	// F202. 특정 사용자의 식단 상세 조회
+	public DietDomain findByUserIdAndDietId(String userId, int dietId) {
+		for (DietDomain diet: diets) {
+			if (diet.getDietId() == dietId
+					&& diet.getUserId().equals(userId)) {
+				return diet;
+			}
+		}
+		
+		return null;
+	}
 	
 	// F203. 식단 수정
 	public void update(DietDomain diet) {
