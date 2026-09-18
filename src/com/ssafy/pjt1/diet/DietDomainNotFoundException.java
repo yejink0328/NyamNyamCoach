@@ -1,4 +1,4 @@
-package com.ssafy.pjt1;
+package com.ssafy.pjt1.diet;
 
 public class DietDomainNotFoundException extends Exception {
 	private static final long serialVersionUID = 1L;
