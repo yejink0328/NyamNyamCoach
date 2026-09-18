@@ -22,6 +22,12 @@ public class DietManagerImpl implements DietManager {
 		return repository.findAll();
 	}
 	
+	// F202. 특정 사용자의 식단 조회
+	@Override
+	public List<DietDomain> getByUserId(String userId) {
+	    return repository.findByUserId(userId);
+	}
+	
 	// F202. 식단 ID를 이용한 상세 조회
 	@Override
 	public DietDomain getById(int dietId) throws DietDomainNotFoundException {
@@ -33,6 +39,22 @@ public class DietManagerImpl implements DietManager {
 		
 		return diet;
 	}
+	
+	// F202. 특정 사용자의 식단 상세 조회
+	@Override
+	public DietDomain getById(String userId, int dietId)
+	        throws DietDomainNotFoundException {
+
+	    DietDomain diet =
+	            repository.findByUserIdAndDietId(userId, dietId);
+
+	    if (diet == null) {
+	        throw new DietDomainNotFoundException(dietId);
+	    }
+
+	    return diet;
+	}
+
 	
 	// F203. 식단 수정
 	@Override
@@ -64,7 +86,4 @@ public class DietManagerImpl implements DietManager {
 	public List<DietDomain> searchFoodName(String foodName) {
 		return null;
 	}
-
-	
-
 }

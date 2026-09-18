@@ -11,9 +11,15 @@ public interface DietManager {
 	// F202. 전체 식단 조회
 	List<DietDomain> getAll();
 	
+	// F202. 특정 사용자의 식단 조회
+		List<DietDomain> getByUserId(String userId);
+	
 	// F202. 식단 ID를 이용한 상세 조회
 	DietDomain getById(int dietId) throws DietDomainNotFoundException;
-	
+
+	// F202. 특정 사용자의 식단 상세 조회
+	DietDomain getById(String userId, int dietId) throws DietDomainNotFoundException;
+
 	// F203. 식단 수정
 	void update(DietDomain diet) throws DietDomainNotFoundException;
 	
